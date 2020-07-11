@@ -1,0 +1,15 @@
+.registrationInfoBar-root {
+    border: 2px solid lightgray;
+    border-radius: 5px;
+}
+
+.registrationInfoBar-root:hover{
+    border: 2px solid #63b3ed;
+    color: #63b3ed
+}
+
+.registrationInfoBar-clicked {
+    border: 2px solid #63b3ed;
+    color: #63b3ed;
+    border-radius: 5px;
+}

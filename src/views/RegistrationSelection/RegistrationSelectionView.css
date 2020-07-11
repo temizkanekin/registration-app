@@ -1,0 +1,19 @@
+label {
+    display: flex;
+    vertical-align: top;
+}
+
+input {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+.registration-input{
+    height: 35px;
+    padding: .5rem;
+    width: 100%;
+}
+
+#star {
+    color:red;
+}

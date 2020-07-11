@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import Toolbar from './components/Toolbar/Toolbar'
+import RegistrationSelectionView from './views/RegistrationSelection/RegistrationSelectionView'
+import WorkshopView from './views/Workshop/WorkshopView'
+import SummaryView from './views/Summary/SummaryView'
 
-function App() {
+function App () {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Router>
+    <div className="header">
+      <Toolbar />
     </div>
-  );
+    <div className="content">
+      <Switch>
+        <Redirect from="/" to="registration-selection-view" exact/>
+          <Route path="/registration-selection-view" component={RegistrationSelectionView} exact />
+          <Route path="/workshop-view" component={WorkshopView} exact />
+          <Route path="/registration-summary" component={SummaryView} exact />
+          <Route render={() => <Redirect to="/" />} />
+      </Switch>
+    </div>
+    </Router>
+  )
 }
 
 export default App;
