@@ -56,9 +56,10 @@ const registrationState = (state = initialState, action) => {
                 selectedRegistrationId: state.registrationDetails.length - 1
             }
         case 'REMOVE_REGISTRATION':
-            state.registrationDetails.splice(action.payload.id, 1)
+            state.registrationDetails.splice(action.payload, 1)
             return {
                 ...state,
+                selectedRegistrationId: 0
             }
         case 'SET_SELECTED_REGISTRATION_ID':
             return {

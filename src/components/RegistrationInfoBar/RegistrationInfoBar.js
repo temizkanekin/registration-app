@@ -10,6 +10,10 @@ const RegistrationInfoBar = ({ className, isClicked, onClick, event_registration
         setIsChecked(true)
     }
 
+    React.useEffect(() => {
+        !isClicked && setIsChecked(false)
+    },[isClicked])
+
     return (
         <div
             key={event_registration_type_id}

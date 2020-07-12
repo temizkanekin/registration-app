@@ -11,7 +11,7 @@ import * as Actions from '../../actions'
 import { Formik } from 'formik';
 import './RegistrationSelectionView.css'
 
-const RegistrationSelectionView = ({ addRegistration, addInitialRegistration,setCurrencySymbol, increaseAmount, setUserInfo, setRegistrationTypeAndFee, registrationState, history, ...props }) => {
+const RegistrationSelectionView = ({ decreaseAmount, clearRegistrationType, addRegistration, addInitialRegistration,setCurrencySymbol, increaseAmount, setUserInfo, setRegistrationTypeAndFee, registrationState, history, ...props }) => {
     const [formSetup, setFormSetup] = React.useState(FormSetup)
     const [isClicked, setIsClicked] = React.useState(false)
 
@@ -25,9 +25,18 @@ const RegistrationSelectionView = ({ addRegistration, addInitialRegistration,set
         const registration_type = formSetup.registration_types.filter(t => t.event_registration_type_id === typeId)
         setFormSetup({ ...formSetup, registration_types: registration_type })
         setIsClicked(true)
-        Object.keys(registrationState.registrationDetails[registrationState.selectedRegistrationId].registration_type).length === 0 &&
+        Object.keys(registrationState.registrationDetails[registrationState.selectedRegistrationId].registration_type).length === 0 ?
         increaseAmount(registration_type[0].event_registration_type_price)
+        :
+        increaseAmount(registration_type[0].event_registration_type_price - registrationState.registrationDetails[registrationState.selectedRegistrationId].registration_type.event_registration_type_price)
         setRegistrationTypeAndFee(registration_type[0])
+    }
+
+    const handleClearRegistrationTypeSelection = () => {
+        setIsClicked(false)
+        decreaseAmount(formSetup.registration_types[0].event_registration_type_price)
+        setFormSetup(FormSetup)
+        clearRegistrationType(registrationState.selectedRegistrationId)
     }
 
     const handleRedirectUserInfo = (values) => {
@@ -134,6 +143,9 @@ const RegistrationSelectionView = ({ addRegistration, addInitialRegistration,set
                                             <span className="text-red-500">{errors.email && touched.email && errors.email}</span>
                                         </div>
                                         <div className="h-full flex">
+                                            <Button danger className="justify-center items-center flex m-auto ml-0" type="button" onClick={handleClearRegistrationTypeSelection}>
+                                                Cancel
+                                            </Button>
                                             <Button title="Fill the form to proceed" className="justify-around items-center flex m-auto mr-0" type="submit" disabled={isSubmitting}>
                                                 Next Step
                                                 <FontAwesomeIcon icon={faArrowCircleRight} />
@@ -162,7 +174,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         setUserInfo: Actions.setUserInfo,
         increaseAmount: Actions.increaseAmount,
         setCurrencySymbol: Actions.setCurrencySymbol,
-        addRegistration: Actions.addRegistration
+        addRegistration: Actions.addRegistration,
+        clearRegistrationType: Actions.clearRegistrationType,
+        decreaseAmount: Actions.decreaseAmount
     }, dispatch)
 }
 

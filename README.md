@@ -2,7 +2,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8f281a99-8650-4fa8-93f1-1a89c0ed7b6b/deploy-status)](https://app.netlify.com/sites/inspiring-davinci-84395e/deploys)
 
-https://inspiring-davinci-84395e.netlify.app/registration-selection-view
+https://inspiring-davinci-84395e.netlify.app
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -11,6 +11,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
     - Registration Selection view to select registration type and user information details.
     - Workshops view to select workshop or workshops.
     - Summary view to display registration type, user information,  workshop type and amount information, payment type selection. User can also add another participant or edit/remove registrated participants from the summary view.
+- You can click Toolbar header to return registration selection view.
 - Formik is used to create and validate user information details form.
 - Redux is used for managing the state throughout the application flow.
 - Registration types are fetched from [registration-form-setup-information.json](src/assets/registration-form-setup-information.json). Multiple registration types are supported. (More registration types can be added to registration-form-setup-information.json with unique id)

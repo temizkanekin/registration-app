@@ -56,8 +56,8 @@ const SummaryView = ({ clearRegistrationType, removeRegistration, decreaseAmount
         history.push('/registration-selection-view')
     }
 
-    const handleDeleteRegistration = (registrationDetail) => (e) => {
-        removeRegistration(registrationDetail)
+    const handleDeleteRegistration = (index) => (e) => {
+        removeRegistration(index)
     }
 
     return (
@@ -74,7 +74,7 @@ const SummaryView = ({ clearRegistrationType, removeRegistration, decreaseAmount
                                 <button onClick={handleEditRegistration(registrationDetail, i)} className="text-blue-400 mr-2" type="button">
                                     <FontAwesomeIcon className="" icon={faEdit} />
                                 </button>
-                                <button onClick={handleDeleteRegistration(registrationDetail)} className="text-red-400" type="button">
+                                <button onClick={handleDeleteRegistration(i)} className="text-red-400" type="button">
                                     <FontAwesomeIcon className="" icon={faWindowClose} />
                                 </button>
                             </div>
