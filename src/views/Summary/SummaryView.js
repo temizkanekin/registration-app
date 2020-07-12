@@ -6,6 +6,7 @@ import * as Actions from '../../actions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faArrowCircleRight, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { faWindowClose } from '@fortawesome/free-regular-svg-icons'
+import { Button } from '../../components/Button/Button'
 import './SummaryView.css'
 
 const SummaryView = ({ removeRegistration, decreaseAmount, setSelectedRegistrationId, addRegistration, registrationState, history, ...props }) => {
@@ -136,16 +137,18 @@ const SummaryView = ({ removeRegistration, decreaseAmount, setSelectedRegistrati
                     </div>
                 </div>
                 <div className="h-full flex mb-4">
-                    <button onClick={handleSummaryConfirm} className="justify-around items-center flex m-auto mr-0 registration-button" type="button"
-                        disabled={
-                            !paymentType
-                            || registrationState.registrationDetails.length === 0
-                            || Object.keys(registrationState.registrationDetails[0].userInfo).length === 0
-                        }
-                    >
-                        Next Step
-                    <FontAwesomeIcon icon={faArrowCircleRight} />
-                    </button>
+                    <div title="Add user or select payment type to proceed" className="m-auto mr-0">
+                        <Button onClick={handleSummaryConfirm} className="justify-around items-center flex"
+                            disabled={
+                                !paymentType
+                                || registrationState.registrationDetails.length === 0
+                                || Object.keys(registrationState.registrationDetails[0].userInfo).length === 0
+                            }
+                        >
+                            Next Step
+                            <FontAwesomeIcon icon={faArrowCircleRight} />
+                        </Button>
+                    </div>
                 </div>
             </div>
             {openDialog && <div className="summary-dialog-outer">

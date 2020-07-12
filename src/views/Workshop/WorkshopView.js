@@ -6,6 +6,7 @@ import * as Actions from '../../actions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTools, faPlusSquare, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
 import FormSetup from '../../assets/registration-form-setup-information.json'
+import { Button } from '../../components/Button/Button'
 import './WorkshopView.css'
 
 const WorkshopView = ({ addWorkshop, registrationState, history, ...props }) => {
@@ -77,10 +78,12 @@ const WorkshopView = ({ addWorkshop, registrationState, history, ...props }) => 
                 }
             </div>
             <div className="h-full flex">
-                <button onClick={handleRedirectSummary} className="justify-around items-center flex m-auto mr-0 registration-button" type="button" disabled={activeRegistrationDetail.workshops.length === 0}>
-                    Next Step
-                <FontAwesomeIcon icon={faArrowCircleRight} />
-                </button>
+                <div title="Add workshop to proceed" className="m-auto mr-0">
+                    <Button onClick={handleRedirectSummary} className="justify-around items-center flex" disabled={activeRegistrationDetail.workshops.length === 0}>
+                        Next Step
+                        <FontAwesomeIcon icon={faArrowCircleRight} />
+                    </Button>
+                </div>
             </div>
         </div>
     )

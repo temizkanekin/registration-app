@@ -1,6 +1,7 @@
 import React from 'react';
 import FormSetup from '../../assets/registration-form-setup-information.json'
 import RegistrationInfoBar from '../../components/RegistrationInfoBar/RegistrationInfoBar'
+import { Button } from '../../components/Button/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faIdCard, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
 import { withRouter } from "react-router-dom";
@@ -93,7 +94,6 @@ const RegistrationSelectionView = ({ setCurrencySymbol, increaseAmount, setUserI
                                 handleChange,
                                 handleSubmit,
                                 isSubmitting,
-                                /* and other goodies */
                             }) => (
                                     <form className="w-full h-full flex flex-col" onSubmit={handleSubmit}>
                                         <div className="w-full flex mb-8">
@@ -132,10 +132,10 @@ const RegistrationSelectionView = ({ setCurrencySymbol, increaseAmount, setUserI
                                             <span className="text-red-500">{errors.email && touched.email && errors.email}</span>
                                         </div>
                                         <div className="h-full flex">
-                                            <button className="justify-around items-center flex m-auto mr-0 registration-button" type="submit" disabled={isSubmitting}>
+                                            <Button title="Fill the form to proceed" className="justify-around items-center flex m-auto mr-0" type="submit" disabled={isSubmitting}>
                                                 Next Step
-                                            <FontAwesomeIcon icon={faArrowCircleRight} />
-                                            </button>
+                                                <FontAwesomeIcon icon={faArrowCircleRight} />
+                                            </Button>
                                         </div>
                                     </form>
                                 )
