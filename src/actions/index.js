@@ -40,10 +40,10 @@ export const addWorkshop = ( workshop ) => {
     }
 }
 
-export const addRegistration = ( registration ) => {
+export const addRegistration = (  ) => {
     return {
         type: 'ADD_REGISTRATION',
-        payload: registration
+        payload: {}
     }
 }
 
@@ -57,6 +57,13 @@ export const removeRegistration = ( registration ) => {
 export const setSelectedRegistrationId = ( registrationId ) => {
     return {
         type: 'SET_SELECTED_REGISTRATION_ID',
+        payload: registrationId
+    }
+}
+
+export const clearRegistrationType = ( registrationId ) => {
+    return {
+        type: 'CLEAR_REGISTRATION_TYPE',
         payload: registrationId
     }
 }

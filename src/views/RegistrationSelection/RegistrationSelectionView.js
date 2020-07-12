@@ -11,7 +11,7 @@ import * as Actions from '../../actions'
 import { Formik } from 'formik';
 import './RegistrationSelectionView.css'
 
-const RegistrationSelectionView = ({ setCurrencySymbol, increaseAmount, setUserInfo, setRegistrationTypeAndFee, registrationState, history, ...props }) => {
+const RegistrationSelectionView = ({ addRegistration, addInitialRegistration,setCurrencySymbol, increaseAmount, setUserInfo, setRegistrationTypeAndFee, registrationState, history, ...props }) => {
     const [formSetup, setFormSetup] = React.useState(FormSetup)
     const [isClicked, setIsClicked] = React.useState(false)
 
@@ -21,9 +21,11 @@ const RegistrationSelectionView = ({ setCurrencySymbol, increaseAmount, setUserI
     }, [setCurrencySymbol])
 
     const handleRegistrationTypeSelection = (typeId) => (e) => {
+        registrationState.registrationDetails.length === 0 && addRegistration()
         const registration_type = formSetup.registration_types.filter(t => t.event_registration_type_id === typeId)
         setFormSetup({ ...formSetup, registration_types: registration_type })
         setIsClicked(true)
+        Object.keys(registrationState.registrationDetails[registrationState.selectedRegistrationId].registration_type).length === 0 &&
         increaseAmount(registration_type[0].event_registration_type_price)
         setRegistrationTypeAndFee(registration_type[0])
     }
@@ -159,7 +161,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         setRegistrationTypeAndFee: Actions.setRegistrationTypeAndFee,
         setUserInfo: Actions.setUserInfo,
         increaseAmount: Actions.increaseAmount,
-        setCurrencySymbol: Actions.setCurrencySymbol
+        setCurrencySymbol: Actions.setCurrencySymbol,
+        addRegistration: Actions.addRegistration
     }, dispatch)
 }
 

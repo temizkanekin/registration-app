@@ -7,12 +7,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faArrowCircleRight, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { faWindowClose } from '@fortawesome/free-regular-svg-icons'
 import { Button } from '../../components/Button/Button'
+import SnackBar from '../../components/SnackBar/SnackBar'
 import './SummaryView.css'
 
-const SummaryView = ({ removeRegistration, decreaseAmount, setSelectedRegistrationId, addRegistration, registrationState, history, ...props }) => {
+const SummaryView = ({ clearRegistrationType, removeRegistration, decreaseAmount, setSelectedRegistrationId, addRegistration, registrationState, history, ...props }) => {
     const [showItems, setShowItems] = React.useState(registrationState.registrationDetails.map(r => false))
     const [paymentType, setPaymentType] = React.useState(undefined)
     const [openDialog, setOpenDialog] = React.useState(false)
+
+    const ref = React.useRef();
 
     const handleShowItemsClick = (index) => (e) => {
         setShowItems(showItems.map((s, i) => i === index ? !s : s))
@@ -39,12 +42,17 @@ const SummaryView = ({ removeRegistration, decreaseAmount, setSelectedRegistrati
         })
         registrations["total_amount"] = total_amount
         registrations["payment_type"] = paymentType
+        ref.current.fireSnackBar({
+            type: "success",
+            message: "Request logged to console"
+        })
         console.log(registrations)
     }
 
     const handleEditRegistration = (registrationDetail, index) => (e) => {
         setSelectedRegistrationId(index)
         decreaseAmount(registrationDetail.registration_type.event_registration_type_price)
+        clearRegistrationType(index)
         history.push('/registration-selection-view')
     }
 
@@ -54,6 +62,7 @@ const SummaryView = ({ removeRegistration, decreaseAmount, setSelectedRegistrati
 
     return (
         <React.Fragment>
+            <SnackBar ref={ref} />
             <div className={`summary-root ${openDialog ? "opacity-50" : ""}`}>
                 <div className="flex justify-between items-center">
                     <span className="font-bold text-xl text-blue-400">Registration Summary</span>
@@ -181,7 +190,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         addRegistration: Actions.addRegistration,
         setSelectedRegistrationId: Actions.setSelectedRegistrationId,
         decreaseAmount: Actions.decreaseAmount,
-        removeRegistration: Actions.removeRegistration
+        removeRegistration: Actions.removeRegistration,
+        clearRegistrationType: Actions.clearRegistrationType
     }, dispatch)
 }
 

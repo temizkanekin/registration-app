@@ -50,7 +50,7 @@ const registrationState = (state = initialState, action) => {
                 ...state
             }
         case 'ADD_REGISTRATION':
-            state.registrationDetails.push(addInitialRegistration(state.registrationDetails.length))
+            state.registrationDetails.push(addInitialRegistration())
             return {
                 ...state,
                 selectedRegistrationId: state.registrationDetails.length - 1
@@ -64,6 +64,11 @@ const registrationState = (state = initialState, action) => {
             return {
                 ...state,
                 selectedRegistrationId: action.payload
+            }
+        case 'CLEAR_REGISTRATION_TYPE':
+            state.registrationDetails[action.payload].registration_type = {}
+            return {
+                ...state,
             }
         default:
             return {
